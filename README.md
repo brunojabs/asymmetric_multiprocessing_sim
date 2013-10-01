@@ -1,4 +1,4 @@
-asymmetric_multiprocessing_sim
+Assymmetric Multiprocessing Simulator
 ==============================
 
-Ruby simulator to Asymmetric Multiprocessing
+Ruby simulator to Asymmetric Multiprocessing by @BrunoJabs
