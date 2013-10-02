@@ -1,0 +1,29 @@
+<h1>Listing fake_processes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Done</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fake_processes.each do |fake_process| %>
+      <tr>
+        <td><%= fake_process.name %></td>
+        <td><%= fake_process.done %></td>
+        <td><%= link_to 'Show', fake_process %></td>
+        <td><%= link_to 'Edit', edit_fake_process_path(fake_process) %></td>
+        <td><%= link_to 'Destroy', fake_process, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fake process', new_fake_process_path %>

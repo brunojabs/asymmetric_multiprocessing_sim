@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fake_process.name %>
+</p>
+
+<p>
+  <strong>Done:</strong>
+  <%= @fake_process.done %>
+</p>
+
+<%= link_to 'Edit', edit_fake_process_path(@fake_process) %> |
+<%= link_to 'Back', fake_processes_path %>
