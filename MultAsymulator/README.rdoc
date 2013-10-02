@@ -1,28 +1,21 @@
-== README
+Ruby Version: 1.9
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Because of Resque Gem you'll have install redis (http://redis.io/download)
 
-Things you may want to cover:
+After install redis, run:
 
-* Ruby version
+<tt>bundle install</tt>
 
-* System dependencies
+<tt>rake db:schema:load</tt>
 
-* Configuration
+Run the redis server:
+<tt>redis-server</tt>
 
-* Database creation
+Run the Rails server:
+<tt>rails s</tt>
 
-* Database initialization
+Run the resque workers:
+<tt>QUEUE=* rake environment resque:work</tt>
+or <tt>BACKGROUND=yes QUEUE=* rake environment resque:work</tt> if you want do run on daemon mode
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+That's it (:
