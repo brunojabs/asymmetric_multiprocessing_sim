@@ -28,7 +28,15 @@ class FakeProcessesController < ApplicationController
 
     respond_to do |format|
       if @fake_process.save
-        Resque.enqueue(Slave, @fake_process.id)
+
+        #=============================
+        # Ok, aqui envio o processo pro meu master decidir o que fazer
+        #=============================
+
+        Master.enqueue(@fake_process)
+
+        #==============================
+
         format.html { redirect_to @fake_process, notice: 'Fake process was successfully created.' }
         format.json { render action: 'show', status: :created, location: @fake_process }
       else
