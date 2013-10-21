@@ -46,3 +46,5 @@ gem 'unicorn'
 
 gem 'resque'
 gem 'resque-status'
+gem 'anjlab-bootstrap-rails', '>= 3.0.0.0', :require => 'bootstrap-rails'
+gem 'colored'

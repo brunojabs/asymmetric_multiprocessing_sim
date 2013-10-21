@@ -74,7 +74,7 @@ class FakeProcessesController < ApplicationController
         Master.enqueue(fp)
       end
     end
-    redirect_to '/fake_processes', notice: 'Criados com sucesso' 
+    redirect_to '/fake_processes', notice: 'Processos criados com sucesso' 
   end
 
   private
