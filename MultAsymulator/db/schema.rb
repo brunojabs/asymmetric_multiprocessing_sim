@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002140551) do
+ActiveRecord::Schema.define(version: 20131009225357) do
+
+  create_table "cars", force: true do |t|
+    t.string   "name"
+    t.string   "placa"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "fake_processes", force: true do |t|
     t.string   "name"
@@ -19,5 +26,13 @@ ActiveRecord::Schema.define(version: 20131002140551) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pecas", force: true do |t|
+    t.integer  "car_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pecas", ["car_id"], name: "index_pecas_on_car_id"
 
 end

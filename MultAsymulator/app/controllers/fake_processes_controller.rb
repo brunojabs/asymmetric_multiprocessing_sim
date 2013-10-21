@@ -14,7 +14,7 @@ class FakeProcessesController < ApplicationController
 
   # GET /fake_processes/new
   def new
-    @fake_process = FakeProcess.new
+    @fake_process = FakeProcess.new(name: "teste1")
   end
 
   # GET /fake_processes/1/edit
@@ -24,20 +24,16 @@ class FakeProcessesController < ApplicationController
   # POST /fake_processes
   # POST /fake_processes.json
   def create
-    @fake_process = FakeProcess.new(fake_process_params)
+
+    if params.has_key?(:default_name)
+      create_multiple
+    else
+      Master.create(@fake_process)
+    end
 
     respond_to do |format|
-      if @fake_process.save
-
-        #=============================
-        # Ok, aqui envio o processo pro meu master decidir o que fazer
-        #=============================
-
-        Master.enqueue(@fake_process)
-
-        #==============================
-
-        format.html { redirect_to @fake_process, notice: 'Fake process was successfully created.' }
+      if @fake_process.save || params;has_key?(:default_name)
+        format.html { redirect_to '/fake_processes', notice: 'Fake process was successfully created.' }
         format.json { render action: 'show', status: :created, location: @fake_process }
       else
         format.html { render action: 'new' }
@@ -70,6 +66,17 @@ class FakeProcessesController < ApplicationController
     end
   end
 
+
+  def create_multiple
+    if quantity = params[:quantity].try(:to_i)
+      quantity.times do |i| 
+        fp = FakeProcess.create(name: "#{params[:default_name]} #{i}", done: false)
+        Master.enqueue(fp)
+      end
+    end
+    redirect_to '/fake_processes', notice: 'Criados com sucesso' 
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_fake_process
@@ -78,6 +85,7 @@ class FakeProcessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fake_process_params
-      params.require(:fake_process).permit(:name, :done)
+      params.permit(:fake_process).permit(:name, :done)
+      params.permit(:quantity, :default_name)
     end
 end

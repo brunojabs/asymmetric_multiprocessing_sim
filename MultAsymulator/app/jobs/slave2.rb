@@ -1,20 +1,22 @@
 # encoding: UTF-8
 class Slave2
+  include Resque::Plugins::Status
   @queue = :slave2
 
-  def self.perform(process_id)
-    process = FakeProcess.find(process_id)
+  def perform
+     process = FakeProcess.find(options["process"])
     puts "==========================================="
     puts ""
-    puts "Ola, sou o slave 2, vou processar seu #{process.name}"
+    puts "Slave 2: Olá, vou processar seu #{process.name}"
     prng = Random.new
     time = prng.rand(15..30)
-    puts "Vou levar #{time} segundos ok? Aguarde por favor"
+    puts "Slave 2: Vou levar #{time} segundos ok? Aguarde por favor"    
+    puts "==========================================="
     sleep time
-    puts "Olha só, terminei de processar o #{process.name}"
+    puts "Slave 2: Terminei meu trabalho..."
     puts ""
     puts "==========================================="
     process.done = true
     process.save
-  end
+   end
 end
