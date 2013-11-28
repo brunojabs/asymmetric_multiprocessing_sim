@@ -5,7 +5,7 @@ namespace :slaves do
   end
 
   task :run => :environment do
-    system 'BACKGROUND=yes QUEUE=slave1 rake environment resque:work'
+    exec '$SHELL BACKGROUND=yes QUEUE=slave1 rake environment resque:work'
     system 'BACKGROUND=yes QUEUE=slave2 rake environment resque:work'
     system 'BACKGROUND=yes QUEUE=slave3 rake environment resque:work'
     system 'BACKGROUND=yes QUEUE=slave4 rake environment resque:work'

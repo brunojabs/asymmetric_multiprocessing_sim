@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Master
   def self.enqueue(process)
     slave = "Slave#{rand(1..4)}"
